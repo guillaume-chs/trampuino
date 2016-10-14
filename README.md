@@ -5,7 +5,7 @@ Arduino docker container for Trampoline RTOS cross compilation &amp; flashing on
 # HOW-TO : docker part
 
  - Build image : `docker build -t <IMAGE_NAME> .`
- - Start linking serial port : `docker run -it -v /dev/<ARDUINO_TTY> <IMAGE_NAME> /bin/bash`
+ - Start linking serial port : `docker run -it --device=/dev/<ARDUINO_TTY> <IMAGE_NAME> /bin/bash`
 
 # HOW-TO : compiling part
 
