@@ -15,7 +15,17 @@ if [ -z ${APP_NAME+x} ]; then
    echo "No app name was given"
 fi
 
+echo "File : $FILE"
+echo "TTY : /dev/$TTY"
+echo "App Name : $APP_NAME"
 
-goil --target=avr/arduino/uno --templates=$TRAMPOLINE_ROOT/goil/templates/ $FILE;
-./make.py;
-avrdude -c arduino -p m328p -P /dev/$TTY -U flash:w:$APP_NAME.hex;
+
+# Move to src folder
+cd ${FILE%*/*}
+
+# Execute compile & flash scripts
+goil --target=avr/arduino/uno --templates="$TRAMPOLINE_ROOT/goil/templates/" "$FILE" && {
+    ./make.py && {
+	avrdude -c arduino -p m328p -P "/dev/$TTY" -U flash:w:$APP_NAME.hex
+    }
+}
