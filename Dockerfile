@@ -11,5 +11,3 @@ RUN apt-get -y update \
 
 COPY trampuine.sh /usr/local/bin/trampuine
 ENTRYPOINT ["trampuine"]
-
-
