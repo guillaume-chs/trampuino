@@ -1,11 +1,15 @@
 FROM debian:jessie
 MAINTAINER guillaumechs
 
-RUN apt-get -y update \
-    && apt-get install -y avrdude gcc-avr avr-libc python wget git unzip \
-    && git clone https://github.com/TrampolineRTOS/trampoline /home/trampoline \
-    && wget -q http://trampoline.rts-software.org/bin/goil-linux-64.zip -O /home/goil-linux-64.zip \
-    && unzip -qq /home/goil-linux-64.zip -d /usr/local/bin
-
 ENV TRAMPOLINE_ROOT='/home/trampoline'
+
+RUN apt-get -y update \
+    && apt-get install -y avrdude gcc-avr avr-libc python gcc g++ git sudo \
+    && git clone https://github.com/guillaume-chs/trampoline-for-docker-trampuino $TRAMPOLINE_ROOT \
+    && $TRAMPOLINE_ROOT/goil/makefile-unix/install.py
+    && apt-get autoremove -y gcc g++ git
+
+COPY trampuine.sh /usr/local/bin/trampuine
+ENTRYPOINT ["trampuine"]
+
 
