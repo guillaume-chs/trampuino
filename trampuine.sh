@@ -26,6 +26,6 @@ cd ${FILE%*/*}
 # Execute compile & flash scripts
 goil --target=avr/arduino/uno --templates="$TRAMPOLINE_ROOT/goil/templates/" "$FILE" && {
     ./make.py && {
-	avrdude -c arduino -p m328p -P "/dev/$TTY" -U flash:w:$APP_NAME.hex
+	avrdude -c arduino -p m328p -P "/dev/$TTY" -U flash:w:$APP_NAME
     }
 }
