@@ -9,5 +9,9 @@ RUN apt-get -y update \
     && $TRAMPOLINE_ROOT/goil/makefile-unix/install.py \
     && apt-get autoremove -y gcc g++ git
 
+
+RUN apt-get install -y dos2unix
 COPY trampuine.sh /usr/local/bin/trampuine
+RUN dos2unix /usr/local/bin/trampuine
+
 ENTRYPOINT ["trampuine"]
