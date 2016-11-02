@@ -11,7 +11,7 @@ Arduino docker container for Trampoline RTOS cross compilation &amp; flashing on
 # STEP 2 : use docker container as a compiler
 
  - Link Arduino device & Mount local source folder
- - execute : `docker run -v <SRC_FOLDER>:/src --device=<TTY> -it trampuino trampuine /src/<BLINK.OIL> <TTY> <APP_NAME>`
+ - execute : `docker run -v <SRC_FOLDER>:/src --device=/dev/<TTY> -it trampuino /src/<FILE.OIL> <TTY> <APP_NAME>`
 
 
 # Exemple with blink
@@ -19,5 +19,4 @@ Arduino docker container for Trampoline RTOS cross compilation &amp; flashing on
  - docker run
  - -v **$(pwd)**:/src
  - --device=**/dev/ttyACM0**
- - -it trampuino
- - trampuine /src/**blink.oil** **/dev/ttyACM0** **trampuinoBlink**
+ - -it trampuino /src/**blink.oil** **ttyACM0** **trampuinoBlink**
